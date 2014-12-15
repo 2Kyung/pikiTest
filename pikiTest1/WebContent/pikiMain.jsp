@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>Piki Test Main</title>
 <style>
 iframe {border-style:none; }
 </style>
