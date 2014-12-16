@@ -22,7 +22,7 @@ public class databaseTask extends linkedGroup{
 //////////////////////////////////////
 	linkedGroup linkG = new linkedGroup();
 	linkedGroup[] l_Teams = new linkedGroup[7];
-	
+	linkedGroup[] l_Capability = new linkedGroup[7];
 	
 	public void initDB() {
 		
@@ -79,9 +79,6 @@ public class databaseTask extends linkedGroup{
 	
 	public void createArray() {
 		////////////////////////////
-		
-		
-		
 		String[] teamName = {"Develop","Design","Plan", "Server", "Contents", "CN", "ST"};
 				
 		try{
@@ -96,7 +93,7 @@ public class databaseTask extends linkedGroup{
 			for(int i =0; i< teamName.length; i++){
 				//////////////////////////////////
 				l_Teams[i] = new linkedGroup();
-				
+				l_Capability[i] = new linkedGroup();
 				rs = stmt.executeQuery("select count(*) from pikiTable where team ='"+ teamName[i] +"'");
 			
 				while(rs.next()){
@@ -110,7 +107,8 @@ public class databaseTask extends linkedGroup{
 					///////////////////////
 					
 					l_Teams[i].add(j,rs.getString("name").toString());
-					System.out.println(l_Teams[i].toString());
+					l_Capability[i].add(j, rs.getString("capability"));
+					//System.out.println(l_Teams[i].toString());
 					j++;		
 				}
 				/////////////////////////1213¼öÁ¤

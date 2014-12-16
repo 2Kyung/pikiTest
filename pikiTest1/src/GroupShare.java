@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class GroupShare extends linkedGroup {
 	public String Groups[][];
+	public float capabilityAvg[];
 	public int  divisor, share, remainder;
 	public int groupColumn, groupRow;
 	
@@ -14,8 +15,10 @@ public class GroupShare extends linkedGroup {
     int randomCount =0;
     int tableAllcount;
 
-    public void insertGroup(linkedGroup[] l_Teams){//1213(linkedGroup linkG, linkedGroup[] l_Teams){//String[][] teamArray ){
+    public void insertGroup(linkedGroup[] l_Teams, linkedGroup[] l_Capability){//1213(linkedGroup linkG, linkedGroup[] l_Teams){//String[][] teamArray ){
 		Groups = new String[groupColumn][groupRow];
+		capabilityAvg = new float[groupColumn];
+		String capability[][] = new String[groupColumn][groupRow-1];
 		
 		char ch = 'A';
 		
@@ -26,34 +29,46 @@ public class GroupShare extends linkedGroup {
 			
 			ch++;
 		}
+		
 		List<Integer> randomList = new ArrayList<>();
 		randomList = createRandomArray(l_Teams);
 		int n =0;
 		int teamRandom = 0;
+		
 		for(int y=1; y<groupRow; y++) {
 			
-	         for(int x=0; x<groupColumn; x++) {
-		         //int teamRandom = random.nextInt(6);
-	        	 
-	        	 //임의의 index를 고를수있는것이먼저일듯/ 즉 linkedGroup에서 함수를만들어야한다.
-	        	 /*if(linkG.getNodeIndex(l_Teams[teamRandom]) == -1 ){
-	        		 
-	        	 }*/
-	        	 if(n < tableAllcount) {
-	        		 System.out.println(" random:"+teamRandom+ " group " + " x="+x +" y="+y + " n= " +n);
-	        		 teamRandom = randomList.get(n);
+			for(int x=0; x<groupColumn; x++) {
+				
+				if(n < tableAllcount) {
+					//System.out.println(" random:"+teamRandom+ " group " + " x="+x +" y="+y + " n= " +n);
+	        		teamRandom = randomList.get(n);
 		        	  
-	        		 if(l_Teams[teamRandom].size() > 0) {
-	    	        	 n++; 
-	        			 Groups[x][y] = l_Teams[teamRandom].get(0);//String 항상0번째 데이터 뽑기
-	        			 System.out.println("insert: "+ l_Teams[teamRandom].get(0) + " n= " + n);
+	        		if(l_Teams[teamRandom].size() > 0) {
+	        			n++; 
+	        			Groups[x][y] = l_Teams[teamRandom].get(0);//String 항상0번째 데이터 뽑기
+	        			capability[x][y-1] = l_Capability[teamRandom].get(0);
+	        			//System.out.println("insert: "+ l_Teams[teamRandom].get(0) + " n= " + n);
 
-	        			 l_Teams[teamRandom].removeFirst();//첫번째지우기
-		        	 
-	        		 }
-	        	 
-	        	 }//if
-	         }
+	        			l_Teams[teamRandom].removeFirst();//첫번째지우기
+	        			l_Capability[teamRandom].removeFirst();
+	        		}
+	        	}
+			}
+		}
+		
+		int capabilitySum = 0;
+		int h = 0;
+		
+		for(int w=0; w<groupColumn; w++) {
+			
+			for(h=0; h<groupRow-1; h++) {
+				
+				if(capability[w][h]!=null)
+					capabilitySum += Integer.parseInt(capability[w][h]);
+			}
+			
+			capabilityAvg[w] = Float.valueOf(String.format("%.2f", (float)capabilitySum/h));
+			capabilitySum = 0;
 		}
 	}
 
@@ -71,7 +86,7 @@ public class GroupShare extends linkedGroup {
 			for(int j=0 ; j < l_Teams[i].size() ; j++) {
 				//System.out.println("j "+j);
 				allRandomArray[randomCount] = i;
-				System.out.println("randomCount 시작= " + randomCount );
+				//System.out.println("randomCount 시작= " + randomCount );
 				randomCount ++;
 			}
 			//randomCount += l_Teams[i].size()-1;
@@ -89,7 +104,7 @@ public class GroupShare extends linkedGroup {
 		Collections.shuffle(randomList);
 		
 		for(int u =0 ; u < randomList.size(); u++){
-			System.out.println("randomlist ="+ randomList.get(u));//출력
+			//System.out.println("randomlist ="+ randomList.get(u));//출력
 		}
 		
 		return randomList;

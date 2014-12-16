@@ -63,30 +63,37 @@ public class pikiServlet extends HttpServlet {
 		
 		//Gshare.insertGroup(DBtask.l_Teams);
 		//1213Gshare.insertGroup(DBtask.linkG, DBtask.l_Teams);
-		Gshare.insertGroup(DBtask.l_Teams);
+		Gshare.insertGroup(DBtask.l_Teams, DBtask.l_Capability);
 			
 		out.println("<table>");
+		out.println("<tr><th>group</th><th></th><th>capability</th></tr>");
 		for(int i=0; i<Gshare.Groups.length; i++) {
 			out.println("<tr>");
-	         for(int j=0; j<Gshare.Groups[i].length; j++) {
+	        for(int j=0; j<Gshare.Groups[i].length; j++) {
 	        	 
-	        	 if(j==0)
-	        		 out.println("<th>"+Gshare.Groups[i][j]+"</th>");
-	        	 else if(j==1)
-	        		 out.println("<td>"+Gshare.Groups[i][j]);
-	        	 else if(j==Gshare.Groups[i].length-1) {
+	        	if(j==0)
+	        		out.println("<th>"+Gshare.Groups[i][j]+"</th>");
+	        	else if(j==1)
+	        		out.println("<td>"+Gshare.Groups[i][j]);
+	        	else if(j==Gshare.Groups[i].length-1) {
 	        		 
-	        		 if(!isEmpty(Gshare.Groups[i][j]))
-	        			 break;
-	        		 else
-	        			 out.println(", "+Gshare.Groups[i][j]+"</td>");
-	        	 }
-	        	 else
-	        		 out.println(", "+Gshare.Groups[i][j]);
+	        		if(!isEmpty(Gshare.Groups[i][j])) {
+	        			out.println("<td>"+String.format("%.2f", Gshare.capabilityAvg[i])+"%</td>");
+	        			break;
+	        		}
+	        		else {
+	        			out.println(", "+Gshare.Groups[i][j]+"</td>");
+	        			out.println("<td>"+String.format("%.2f", Gshare.capabilityAvg[i])+"%</td>");
+	        		}
+	        	}
+	        	else
+	        		out.println(", "+Gshare.Groups[i][j]);
 	         }
 	         out.println("</tr>");
 	    }
 		out.println("</table>");
+		
+		
 	}
 	
 	public boolean isEmpty(String object) {
