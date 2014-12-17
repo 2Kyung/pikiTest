@@ -15,6 +15,18 @@
 
 <body>
 
+	<script>
+		function autoResize() {
+			var iframeHeight = document.getElementById("groupFrame").contentWindow.document.body.scrollHeight;
+    		document.getElementById("groupFrame").height = iframeHeight;
+			document.getElementById("graphFrame").style.top = iframeHeight;
+		}
+		window.onload = function() {
+			var iframeElement = document.getElementById("groupFrame");
+			iframeElement.onload = autoResize;
+		}
+	</script>
+
 <aside>
 	<form name="makeGroupForm" method=post action="/pikiTest1/pikiServlet" target="groupFrame">
 		<input type="submit" value="make Group" onClick="buttonEnabled()">
@@ -50,18 +62,8 @@
 </aside>
 
 <section>
-	<iframe name="groupFrame" id="groupFrame" onLoad="autoResizeGroup()"></iframe>
+	<iframe name="groupFrame" id="groupFrame"></iframe>
 	<iframe name="graphFrame" id="graphFrame" height="1000"></iframe>
-	
-	<script>
-		function autoResizeGroup() {
-			var iframeHeight = document.getElementById("groupFrame").contentWindow.document.body.scrollHeight;
-    		document.getElementById("groupFrame").height = iframeHeight;
-    		
-    		var iframeHeight = document.getElementById("groupFrame").contentWindow.document.body.scrollHeight;
-			document.getElementById("graphFrame").style.top = iframeHeight;
-		}
-	</script>
 	
 </section>
 

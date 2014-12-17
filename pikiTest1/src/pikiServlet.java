@@ -43,7 +43,7 @@ public class pikiServlet extends HttpServlet {
 			request.setAttribute("capability"+i, Gshare.capabilityAvg[i]);
 		}
 		
-		RequestDispatcher view = request.getRequestDispatcher("/drawGraph.jsp");
+		RequestDispatcher view = request.getRequestDispatcher("drawGraph.jsp");
 		view.forward(request, response);
 	}
 
