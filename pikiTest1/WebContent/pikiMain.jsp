@@ -16,7 +16,13 @@ iframe {border-style:none; }
 		
 </form>
 
-<iframe name="resultFrame" width="1200" height="1200"></iframe>
+<iframe name="resultFrame" width="1200" height="1200">
+<!-- <form name="drawGraphForm" method=get action="/pikiTest1/pikiServlet" target="resultFrame">
+
+	<input type="submit" value="draw Graph">
+		
+</form>-->
+</iframe>
 
 </body>
 </html>

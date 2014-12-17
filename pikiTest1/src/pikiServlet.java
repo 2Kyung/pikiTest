@@ -33,6 +33,7 @@ public class pikiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		//request.setAttribute("", arg1);
 	}
 
 	/**
@@ -57,7 +58,9 @@ public class pikiServlet extends HttpServlet {
 		out.println("table {border-collapse:collapse; }");
 		out.println("table, th, td {border:1px solid black; }");
 		out.println("th, td {padding:10px; }");
-		out.println("</style></head>");
+		out.println("canvas {border:1px solid #E6E6E6; }");
+		out.println("</style>");
+		out.println("</head>");
 		
 		System.out.println(Gshare.divisor+ "명 그룹 "+ Gshare.groupColumn +"행"+ Gshare.groupRow +"열 그룹 1개<br>");		
 		
@@ -93,7 +96,7 @@ public class pikiServlet extends HttpServlet {
 	    }
 		out.println("</table>");
 		
-		
+		//request.getRequestDispatcher("drawGraph.jsp").forward(request, response);
 	}
 	
 	public boolean isEmpty(String object) {
