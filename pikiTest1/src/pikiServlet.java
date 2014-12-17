@@ -34,14 +34,13 @@ public class pikiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		System.out.println("allcount: "+DBtask.allCount);
 		request.setAttribute("allCount", DBtask.allCount);
 		
 		request.setAttribute("capabilityLength", Gshare.capabilityAvg.length);
 		
 		for(int i=0; i<Gshare.capabilityAvg.length; i++) {
+			request.setAttribute("groupName"+i, Gshare.Groups[i][0]);
 			request.setAttribute("capability"+i, Gshare.capabilityAvg[i]);
-			System.out.println("capability "+i+" :"+ Gshare.capabilityAvg[i]);
 		}
 		
 		RequestDispatcher view = request.getRequestDispatcher("/drawGraph.jsp");
