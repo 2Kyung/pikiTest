@@ -3,6 +3,7 @@
 import java.io.IOException;
 import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -33,7 +34,18 @@ public class pikiServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//request.setAttribute("", arg1);
+		System.out.println("allcount: "+DBtask.allCount);
+		request.setAttribute("allCount", DBtask.allCount);
+		
+		request.setAttribute("capabilityLength", Gshare.capabilityAvg.length);
+		
+		for(int i=0; i<Gshare.capabilityAvg.length; i++) {
+			request.setAttribute("capability"+i, Gshare.capabilityAvg[i]);
+			System.out.println("capability "+i+" :"+ Gshare.capabilityAvg[i]);
+		}
+		
+		RequestDispatcher view = request.getRequestDispatcher("/drawGraph.jsp");
+		view.forward(request, response);
 	}
 
 	/**
@@ -95,8 +107,6 @@ public class pikiServlet extends HttpServlet {
 	         out.println("</tr>");
 	    }
 		out.println("</table>");
-		
-		//request.getRequestDispatcher("drawGraph.jsp").forward(request, response);
 	}
 	
 	public boolean isEmpty(String object) {
